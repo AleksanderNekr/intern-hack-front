@@ -28,9 +28,9 @@
         id="status"
         (change)="onSelectedStatus(status.value)"
       >
-        <option default>Студент</option>
-        <option>Сотрудник Проектного офиса</option>
-        <option>Представитель компании-партнера</option>
+        <option default>{{ Roles[0] }}</option>
+        <option>{{ Roles[1] }}</option>
+        <option>{{ Roles[2] }}</option>
       </select>
     </div>
 

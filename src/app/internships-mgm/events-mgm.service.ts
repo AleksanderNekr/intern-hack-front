@@ -1,18 +1,18 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { AppUser, Tag } from "../user-mgm/user-mgm.service";
+import { HseEvent } from "../models";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsMgmService {
 
-  public events: WritableSignal<Event[]> = signal(this.fetchEvents())
+  public events: WritableSignal<HseEvent[]> = signal(this.fetchEvents())
 
   constructor() {
     this.events.set(this.fetchEvents())
   }
 
-  private fetchEvents(): Event[] {
+  private fetchEvents(): HseEvent[] {
     let events = localStorage.getItem("events")
     if (events === null) {
       return []
@@ -20,7 +20,7 @@ export class EventsMgmService {
     return JSON.parse(events)
   }
 
-  addEvent(event: Event) {
+  addEvent(event: HseEvent) {
     this.events.update(value => {
       value.push(event)
       return value
@@ -30,7 +30,7 @@ export class EventsMgmService {
     this.callApi(event)
   }
 
-  private callApi(event: Event) {
+  private callApi(event: HseEvent) {
     const myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json");
 
@@ -57,7 +57,7 @@ export class EventsMgmService {
 
   }
 
-  deleteEvent(event: Event) {
+  deleteEvent(event: HseEvent) {
     this.events.update(value => {
       value = value.filter(v => v != event)
       return value
@@ -65,28 +65,16 @@ export class EventsMgmService {
     localStorage.setItem("events", JSON.stringify(this.events()))
   }
 
-  updateEvent(event: Event) {
+  updateEvent(event: HseEvent) {
     this.events.update(value => {
       value = value.filter(e => e.id !== event.id)
       value.push(event)
       return value
     })
+    localStorage.setItem("events", JSON.stringify(this.events()))
   }
-}
 
-export interface Event {
-  id: number
-  name: string
-  type: EventType
-  tags: Tag[]
-  organizerName: string
-  endDate: Date
-  responded: AppUser[]
-  description: string
-}
-
-export enum EventType {
-  internship = 'Internship',
-  project = 'Project',
-  event = 'Event',
+  getEvents(): HseEvent[] {
+    return this.events();
+  }
 }

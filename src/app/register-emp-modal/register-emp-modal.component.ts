@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NgForOf } from "@angular/common";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AppUser, Status, UserMgmService } from "../user-mgm/user-mgm.service";
+import { UserMgmService } from "../user-mgm/user-mgm.service";
+import { AppUser, Roles } from "../models";
 
 @Component({
   selector: 'app-register-emp-modal',
@@ -20,7 +21,7 @@ export class RegisterEmpModalComponent {
     email: '',
     subscribedTo: [],
     tags: [],
-    status: Status.Employer,
+    role: Roles[2],
     pass: ''
   }
 

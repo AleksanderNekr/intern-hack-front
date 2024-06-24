@@ -1,21 +1,10 @@
 import { computed, Injectable, signal, WritableSignal } from '@angular/core';
-import { Event } from "../internships-mgm/events-mgm.service";
+import { AppUser, HseEvent } from "../models";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserMgmService {
-  tags: { [key: string]: Tag } = {
-    'IT': Tag.IT,
-    'DS': Tag.DS,
-    'Backend': Tag.Backend,
-    'Frontend': Tag.Frontend,
-    'Management': Tag.Management,
-    'Internship': Tag.Internship,
-    'Project': Tag.Project,
-    'Event': Tag.Event,
-  };
-
   constructor() {
   }
 
@@ -32,9 +21,9 @@ export class UserMgmService {
   }
 
   addTagToCurrent(tag: string) {
-    if (this.currentUser()?.tags.indexOf(this.tags[tag]) ?? -1 < 0) {
+    if (this.currentUser()?.tags.indexOf(tag) ?? -1 < 0) {
       this.currentUser.update(value => {
-        value?.tags.push(this.tags[tag])
+        value?.tags.push(tag)
         return value
       })
     }
@@ -43,13 +32,13 @@ export class UserMgmService {
   removeTagFromCurrent(tag: string) {
     if (this.currentUser() !== null) {
       this.currentUser.update(value => {
-        value!.tags = value!.tags.filter((t) => t != this.tags[tag])
+        value!.tags = value!.tags.filter((t) => t != tag)
         return value
       })
     }
   }
 
-  subscribeCurrentToEvent(event: Event) {
+  subscribeCurrentToEvent(event: HseEvent) {
     this.currentUser.update(value => {
       if (value === null || (value.subscribedTo.indexOf(event) ?? -1) >= 0) {
         return value
@@ -67,29 +56,4 @@ export class UserMgmService {
     this.currentUser.set(user)
     localStorage.setItem("user", JSON.stringify(user))
   }
-}
-
-export interface AppUser {
-  email: string
-  pass: string
-  tags: Tag[]
-  status: Status
-  subscribedTo: Event[]
-}
-
-export enum Tag {
-  IT,
-  DS,
-  Backend,
-  Frontend,
-  Management,
-  Internship,
-  Project,
-  Event,
-}
-
-export enum Status {
-  Student,
-  Hse,
-  Employer
 }
