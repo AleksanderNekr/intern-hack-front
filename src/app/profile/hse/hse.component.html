@@ -7,7 +7,7 @@
     <button class="btn btn-outline-primary" (click)="addEvent()">Добавить</button>
   </div>
   <div class="event-cards">
-    @for (projEvent of eventsMgmService.getEvents(); track $index) {
+    @for (projEvent of eventsMgmService.events(); track $index) {
       <div class="event-card">
         <h3>{{ projEvent.name }}</h3>
         <p><strong>Организатор:</strong> {{ projEvent.organizerName }}</p>

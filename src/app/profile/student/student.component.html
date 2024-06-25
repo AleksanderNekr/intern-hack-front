@@ -115,11 +115,11 @@
 
   <div class="subscription-history">
     <h1>События, на которые вы подали заявку</h1>
-    @if (subscribedEvents() === undefined || subscribedEvents()?.length === 0) {
+    @if (this.userService.currentUser()?.subscribedTo === undefined || this.userService.currentUser()?.subscribedTo?.length === 0) {
       <h6>Нет событий</h6>
     }
     <ul>
-      <li *ngFor="let event of subscribedEvents()">
+      <li *ngFor="let event of this.userService.currentUser()?.subscribedTo">
         {{ event.name }} - {{ event.endDate | date : "dd.MM.Y" }}
       </li>
     </ul>

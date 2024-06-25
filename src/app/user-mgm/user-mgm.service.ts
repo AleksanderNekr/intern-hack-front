@@ -1,11 +1,12 @@
 import { computed, Injectable, signal, WritableSignal } from '@angular/core';
 import { AppUser, HseEvent } from "../models";
+import { EventsMgmService } from "../internships-mgm/events-mgm.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserMgmService {
-  constructor() {
+  constructor(protected eventsMgmService: EventsMgmService) {
   }
 
   currentUser: WritableSignal<AppUser | null> = signal(JSON.parse(localStorage.getItem("user")!))
@@ -41,17 +42,18 @@ export class UserMgmService {
   }
 
   subscribeCurrentToEvent(event: HseEvent) {
+    if (this.currentUser() === null || (this.currentUser()!.subscribedTo.map(ev => ev.id).includes(event.id))) {
+      return;
+    }
+
     this.currentUser.update(value => {
-      if (value === null || (value.subscribedTo.indexOf(event) ?? -1) >= 0) {
-        return value
-      }
-      value.subscribedTo.push(event)
+      event.responded.push(value!)
+      value!.subscribedTo.push(event)
       localStorage.setItem("user", JSON.stringify(value))
+      this.eventsMgmService.updateToLocal(event)
       return value
     })
   }
-
-  eventsForCurrent = computed(() => this.currentUser()?.subscribedTo)
 
   login(user: AppUser) {
     this.currentUser.set(user)

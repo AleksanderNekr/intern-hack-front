@@ -19,7 +19,7 @@ import { HseEvent, Roles, Tags } from "../../models";
 })
 export class StudentComponent {
 
-  constructor(private userService: UserMgmService,
+  constructor(protected userService: UserMgmService,
               private eventsMgmService: EventsMgmService) {
     this.allTags = Tags
   }
@@ -38,7 +38,6 @@ export class StudentComponent {
 
   events = computed(() => this.eventsMgmService.events())
   selectedMethod = 'none';
-  subscribedEvents = computed(() => this.userService.eventsForCurrent())
 
   addTagHandle(tag: string) {
     this.userService.addTagToCurrent(tag)
@@ -49,9 +48,7 @@ export class StudentComponent {
   }
 
   subscribeToEvent(event: HseEvent) {
-    event.responded.push(this.userService.currentUser()!)
     this.userService.subscribeCurrentToEvent(event)
-    this.eventsMgmService.updateEvent(event);
   }
 
   getTags(event: HseEvent) {

@@ -77,4 +77,10 @@ export class EventsMgmService {
   getEvents(): HseEvent[] {
     return this.events();
   }
+
+  updateToLocal(event: HseEvent) {
+    let events = this.events().filter(e => e.id !== event.id)
+    events.push(event);
+    localStorage.setItem("events", JSON.stringify(events))
+  }
 }
