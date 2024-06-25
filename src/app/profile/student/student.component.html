@@ -7,20 +7,21 @@
       class="form-floating d-inline-flex p-1 m-1 ps-3 me-2 align-items-center">
       <p class="form-label me-3 mb-0">Способ получения уведомлений о новых событиях</p>
       <div class="form-check form-check-inline">
-        <input [(ngModel)]="selectedMethod" [value]="'email'" class="form-check-input" type="radio" id="email"
-               name="mail-method">
+        <input [(ngModel)]="selectedChannel" [value]="'email'" class="form-check-input" type="radio" id="email"
+               name="mail-method" (change)="updateChannel()">
         <label class="form-check-label" for="email">Электронная почта</label>
       </div>
       <div class="form-check form-check-inline">
-        <input [(ngModel)]="selectedMethod" [value]="'telegram'" class="form-check-input" type="radio" id="tg"
-               name="mail-method">
+        <input [(ngModel)]="selectedChannel" [value]="'telegram'" class="form-check-input" type="radio" id="tg"
+               name="mail-method" (change)="updateChannel(); showFormToAddId()">
         <label class="form-check-label" for="tg">Telegram</label>
       </div>
       <div class="form-check form-check-inline">
-        <input [(ngModel)]="selectedMethod" [value]="'none'" class="form-check-input" type="radio" id="none"
-               name="mail-method">
+        <input [(ngModel)]="selectedChannel" [value]="'none'" class="form-check-input" type="radio" id="none"
+               name="mail-method" (change)="updateChannel()">
         <label class="form-check-label" for="none">Не получать уведомления</label>
       </div>
+
     </div>
     <div class="tags">
       <div class="tags-your">

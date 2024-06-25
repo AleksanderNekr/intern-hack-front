@@ -22,7 +22,9 @@ export class RegisterEmpModalComponent {
     subscribedTo: [],
     tags: [],
     role: Roles[2],
-    pass: ''
+    pass: '',
+    selectedChannel: "none",
+    tgId: "",
   }
 
   constructor(protected activeModal: NgbActiveModal,

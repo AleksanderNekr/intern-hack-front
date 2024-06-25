@@ -4,6 +4,8 @@ export interface AppUser {
   tags: string[]
   role: string
   subscribedTo: HseEvent[]
+  selectedChannel: string
+  tgId: string
 }
 
 export const Tags: string[] = [ 'IT', 'Анализ данных', 'Бэкенд' ]

@@ -37,7 +37,9 @@ export class LoginComponent {
       pass: this.loginFormGroup.controls.passwordField.value!,
       tags: [],
       role: this.selectedRole,
-      subscribedTo: []
+      subscribedTo: [],
+      selectedChannel: 'none',
+      tgId: '',
     })
   }
 

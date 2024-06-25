@@ -37,7 +37,6 @@ export class StudentComponent {
   fullName = ''
 
   events = computed(() => this.eventsMgmService.events())
-  selectedMethod = 'none';
 
   addTagHandle(tag: string) {
     this.userService.addTagToCurrent(tag)
@@ -56,4 +55,16 @@ export class StudentComponent {
   }
 
   protected readonly Roles = Roles;
+
+  selectedChannel: string = this.currentUser()?.selectedChannel ?? 'none'
+
+  showFormToAddId() {
+    if (this.currentUser()?.tgId.length === 0) {
+      // todo
+    }
+  }
+
+  updateChannel() {
+    this.userService.updateChannel(this.selectedChannel);
+  }
 }

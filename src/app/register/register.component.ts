@@ -33,7 +33,9 @@ export class RegisterComponent {
       pass: this.registerFormGroup.controls.pass1Field.value!,
       tags: [],
       role: this.selectRole,
-      subscribedTo: []
+      subscribedTo: [],
+      tgId: '',
+      selectedChannel: 'none',
     })
   }
 

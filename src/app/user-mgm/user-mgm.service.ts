@@ -59,4 +59,16 @@ export class UserMgmService {
     this.currentUser.set(user)
     localStorage.setItem("user", JSON.stringify(user))
   }
+
+  updateChannel(selectedChannel: string) {
+    this.currentUser.update(u => {
+      if (u === null || u.selectedChannel === selectedChannel) {
+        return u;
+      }
+
+      u.selectedChannel = selectedChannel;
+      localStorage.setItem("user", JSON.stringify(u))
+      return u;
+    })
+  }
 }
