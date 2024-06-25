@@ -47,7 +47,6 @@ export class UserMgmService {
       }
       value.subscribedTo.push(event)
       localStorage.setItem("user", JSON.stringify(value))
-      event.responded.push(value)
       return value
     })
   }

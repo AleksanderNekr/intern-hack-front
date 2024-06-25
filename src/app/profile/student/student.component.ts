@@ -49,6 +49,7 @@ export class StudentComponent {
   }
 
   subscribeToEvent(event: HseEvent) {
+    event.responded.push(this.userService.currentUser()!)
     this.userService.subscribeCurrentToEvent(event)
     this.eventsMgmService.updateEvent(event);
   }
