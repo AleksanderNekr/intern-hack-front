@@ -19,15 +19,15 @@
         <p><strong>Тип события:</strong> {{ projEvent.type }}</p>
         <p><strong>Описание:</strong> {{ projEvent.description }}</p>
         <p><strong>Подали
-                   заявку:</strong> {{ projEvent.responded.length > 0 ? projEvent.responded.join('; ') : 'нет подавших' }}
+                   заявку:</strong> {{ projEvent.responded.length > 0 ? projEvent.responded.length : 'нет подавших' }}
         </p>
-        <button (click)="editEvent(projEvent)">Редактировать</button>
-        <button class="mx-1" (click)="deleteEvent(projEvent)">Удалить</button>
         <ul class="student-responses">
           <li *ngFor="let response of projEvent.responded">
             {{ response.email }}
           </li>
         </ul>
+        <button (click)="editEvent(projEvent)">Редактировать</button>
+        <button class="mx-1" (click)="deleteEvent(projEvent)">Удалить</button>
       </div>
     }
   </div>

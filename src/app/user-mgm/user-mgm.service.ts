@@ -26,6 +26,7 @@ export class UserMgmService {
         value?.tags.push(tag)
         return value
       })
+      localStorage.setItem("user", JSON.stringify(this.currentUser()))
     }
   }
 
@@ -35,6 +36,7 @@ export class UserMgmService {
         value!.tags = value!.tags.filter((t) => t != tag)
         return value
       })
+      localStorage.setItem("user", JSON.stringify(this.currentUser()))
     }
   }
 

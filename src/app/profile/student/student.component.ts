@@ -50,6 +50,7 @@ export class StudentComponent {
 
   subscribeToEvent(event: HseEvent) {
     this.userService.subscribeCurrentToEvent(event)
+    this.eventsMgmService.updateEvent(event);
   }
 
   getTags(event: HseEvent) {

@@ -37,7 +37,7 @@ export class EventsMgmService {
     const raw = JSON.stringify({
       "users": [
         {
-          "target_id": "289448982",
+          "target_id": "926188677",
           "target": "telegram"
         },
       ],
