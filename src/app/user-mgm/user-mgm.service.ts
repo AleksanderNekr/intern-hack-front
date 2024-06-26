@@ -28,6 +28,9 @@ export class UserMgmService {
     if (this.currentUser()?.tags.indexOf(tag) ?? -1 < 0) {
       this.currentUser.update(value => {
         value?.tags.push(tag)
+        if (value?.role === Roles[0]){
+          localStorage.setItem("student", JSON.stringify(value))
+        }
         return value
       })
       localStorage.setItem("user", JSON.stringify(this.currentUser()))
