@@ -1,5 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { HseEvent } from "../models";
+import { AppUser, HseEvent } from "../models";
+import { UserMgmService } from "../user-mgm/user-mgm.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class EventsMgmService {
 
   public events: WritableSignal<HseEvent[]> = signal(this.fetchEvents())
 
-  constructor() {
+  constructor(private ums: UserMgmService) {
     this.events.set(this.fetchEvents())
   }
 
@@ -27,18 +28,37 @@ export class EventsMgmService {
     })
     localStorage.setItem("events", JSON.stringify(this.events()))
 
-    this.callApi(event)
+    const userToSend = this.ums.currentUser();
+    for (const tag of event.tags) {
+      if (userToSend?.tags.includes(tag)) {
+        this.callApi(event, userToSend);
+        return
+      }
+    }
   }
 
-  private callApi(event: HseEvent) {
+  private callApi(event: HseEvent, user: AppUser) {
+    const target: string = user.selectedChannel;
+    if (target === 'none') {
+      console.log('no send')
+      return;
+    }
+
     const myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json");
+
+    let target_id: string;
+    if (target === 'telegram') {
+      target_id = user.tgId;
+    } else {
+      target_id = user.email;
+    }
 
     const raw = JSON.stringify({
       "users": [
         {
-          "target_id": "926188677",
-          "target": "telegram"
+          "target_id": target_id,
+          "target": target
         },
       ],
       "event_name": event.name,
