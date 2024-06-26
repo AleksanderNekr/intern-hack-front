@@ -67,7 +67,7 @@ export class EventsMgmService {
         },
       ],
       "event_name": event.name,
-      "event_link": event.organizerName.length > 0 ? event.organizerName.length : "none"
+      "event_link": "https://hse-events-management.vercel.app/profile"
     });
     fetch("https://hack-bot.cleverapps.io/send_message", {
       method: "POST",
