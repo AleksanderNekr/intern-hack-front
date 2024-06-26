@@ -69,11 +69,12 @@ export class EventsMgmService {
       "event_name": event.name,
       "event_link": "https://hse-events-management.vercel.app/profile"
     });
-    fetch("https://localhost:5000/send_message", {
+    fetch("http://localhost:5000/send_message", {
       method: "POST",
       headers: myHeaders,
       body: raw,
       redirect: "follow",
+      mode: 'no-cors'
     })
       .then((response) => response.text())
       .then((result) => console.log(result))
