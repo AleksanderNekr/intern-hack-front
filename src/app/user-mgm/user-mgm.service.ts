@@ -38,6 +38,9 @@ export class UserMgmService {
     if (this.currentUser() !== null) {
       this.currentUser.update(value => {
         value!.tags = value!.tags.filter((t) => t != tag)
+        if (value!.role === Roles[0]){
+          localStorage.setItem("student", JSON.stringify(value))
+        }
         return value
       })
       localStorage.setItem("user", JSON.stringify(this.currentUser()))
@@ -61,6 +64,9 @@ export class UserMgmService {
   login(user: AppUser) {
     this.currentUser.set(user)
     localStorage.setItem("user", JSON.stringify(user))
+    if (user.role === Roles[0]){
+      localStorage.setItem("student", JSON.stringify(user))
+    }
   }
 
   updateChannel(selectedChannel: string) {
@@ -71,6 +77,9 @@ export class UserMgmService {
 
       u.selectedChannel = selectedChannel;
       localStorage.setItem("user", JSON.stringify(u))
+      if (u.role === Roles[0]){
+        localStorage.setItem("student", JSON.stringify(u))
+      }
       return u;
     })
   }
