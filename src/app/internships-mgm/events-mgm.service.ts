@@ -28,7 +28,12 @@ export class EventsMgmService {
     })
     localStorage.setItem("events", JSON.stringify(this.events()))
 
-    const userToSend: AppUser = JSON.parse(localStorage.getItem("user")!);
+    const studval = localStorage.getItem("student");
+    if (studval === null) {
+      return;
+    }
+
+    const userToSend: AppUser = JSON.parse(studval);
     for (const tag of event.tags) {
       if (userToSend?.tags.includes(tag)) {
         this.callApi(event, userToSend);

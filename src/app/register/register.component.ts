@@ -23,6 +23,7 @@ export class RegisterComponent {
     emailField: new FormControl('', [ Validators.required, Validators.email ]),
     pass1Field: new FormControl('', [ Validators.required ]),
     pass2Field: new FormControl('', [ Validators.required ]),
+    tgId: new FormControl(''),
   })
 
   selectRole = Roles[0]
@@ -34,7 +35,7 @@ export class RegisterComponent {
       tags: [],
       role: this.selectRole,
       subscribedTo: [],
-      tgId: '',
+      tgId: this.registerFormGroup.controls.tgId.value ?? 'none',
       selectedChannel: 'none',
     })
   }

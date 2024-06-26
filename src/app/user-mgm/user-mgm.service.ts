@@ -1,5 +1,5 @@
 import { computed, Injectable, signal, WritableSignal } from '@angular/core';
-import { AppUser, HseEvent } from "../models";
+import { AppUser, HseEvent, Roles } from "../models";
 import { EventsMgmService } from "../internships-mgm/events-mgm.service";
 
 @Injectable({
@@ -14,6 +14,9 @@ export class UserMgmService {
   register(user: AppUser) {
     this.currentUser.set(user)
     localStorage.setItem("user", JSON.stringify(user))
+    if (user.role === Roles[0]){
+      localStorage.setItem("student", JSON.stringify(user))
+    }
   }
 
   logout() {

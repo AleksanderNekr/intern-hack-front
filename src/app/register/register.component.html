@@ -41,6 +41,15 @@
         <option>{{ Roles[1] }}</option>
       </select>
     </div>
+
+    <div>
+      <label>Введите ваш telegram ID</label>
+      <input
+        formControlName="tgId"
+        type="text"
+        placeholder="Введите Telegram ID"
+      />
+    </div>
     <button type="submit">Зарегистрироваться</button>
   </form>
 </div>
@@ -79,6 +88,7 @@
   /* Стили для инпутов и селекта */
   .register-container input[type="email"],
   .register-container input[type="password"],
+  .register-container input[type="text"],
   .register-container select {
     width: 100%;
     padding: 12px;
@@ -91,6 +101,7 @@
 
   .register-container input[type="email"]:focus,
   .register-container input[type="password"]:focus,
+  .register-container input[type="text"]:focus,
   .register-container select:focus {
     border-color: #336699; /* Изменить цвет рамки при фокусе */
   }
