@@ -23,7 +23,7 @@
         </p>
         <ul class="student-responses">
           <li *ngFor="let response of projEvent.responded">
-            {{ response.email }}
+            {{ response }}
           </li>
         </ul>
         <button (click)="editEvent(projEvent)">Редактировать</button>

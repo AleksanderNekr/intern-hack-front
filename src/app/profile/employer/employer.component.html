@@ -17,7 +17,7 @@
       <button class="mx-1" (click)="deleteEvent(projEvent)">Удалить</button>
       <ul class="student-responses">
         <li *ngFor="let response of projEvent.responded">
-          {{ response.email }}
+          {{ response }}
         </li>
       </ul>
     </div>

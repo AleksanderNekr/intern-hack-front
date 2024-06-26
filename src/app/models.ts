@@ -23,7 +23,7 @@ export interface HseEvent {
   tags: string[]
   organizerName: string
   endDate: Date
-  responded: AppUser[]
+  responded: string[]
   description: string
 }
 

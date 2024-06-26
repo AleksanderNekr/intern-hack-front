@@ -9,7 +9,7 @@ export class EventsMgmService {
 
   public events: WritableSignal<HseEvent[]> = signal(this.fetchEvents())
 
-  constructor(private ums: UserMgmService) {
+  constructor() {
     this.events.set(this.fetchEvents())
   }
 
@@ -92,10 +92,6 @@ export class EventsMgmService {
       return value
     })
     localStorage.setItem("events", JSON.stringify(this.events()))
-  }
-
-  getEvents(): HseEvent[] {
-    return this.events();
   }
 
   updateToLocal(event: HseEvent) {

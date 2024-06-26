@@ -47,7 +47,7 @@ export class UserMgmService {
     }
 
     this.currentUser.update(value => {
-      event.responded.push(value!)
+      event.responded.push(value!.email)
       value!.subscribedTo.push(event)
       localStorage.setItem("user", JSON.stringify(value))
       this.eventsMgmService.updateToLocal(event)
