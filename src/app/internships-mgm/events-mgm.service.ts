@@ -69,7 +69,7 @@ export class EventsMgmService {
       "event_name": event.name,
       "event_link": "https://hse-events-management.vercel.app/profile"
     });
-    fetch("http://localhost:5000/send_message", {
+    fetch("https://hack-bot.cleverapps.io/send_message", {
       method: "POST",
       headers: myHeaders,
       body: raw,
