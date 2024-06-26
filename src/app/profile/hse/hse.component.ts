@@ -6,6 +6,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UserMgmService } from "../../user-mgm/user-mgm.service";
 import { RegisterEmpModalComponent } from "../../register-emp-modal/register-emp-modal.component";
 import { EventTypes, HseEvent } from "../../models";
+import { VacanciesService } from "../../vacancies-mgm/vacancies.service";
 
 @Component({
   selector: 'app-hse',
@@ -19,6 +20,7 @@ import { EventTypes, HseEvent } from "../../models";
 export class HseComponent {
   constructor(protected eventsMgmService: EventsMgmService,
               protected userMgmService: UserMgmService,
+              protected vacanciesService: VacanciesService,
               private modalService: NgbModal) {
   }
 
@@ -54,5 +56,10 @@ export class HseComponent {
 
   registerEmployer() {
     this.modalService.open(RegisterEmpModalComponent)
+  }
+
+  parseVacancies() {
+    this.vacanciesService.getVacancies()
+    console.log('Started parsing vacancies')
   }
 }

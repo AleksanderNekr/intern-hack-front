@@ -73,7 +73,7 @@ export class EventsMgmService {
       method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: "follow"
+      redirect: "follow",
     })
       .then((response) => response.text())
       .then((result) => console.log(result))

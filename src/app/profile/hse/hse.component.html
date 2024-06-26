@@ -5,6 +5,9 @@
     <button class="btn btn-outline-primary mb-3" (click)="registerEmployer()">Зарегистрировать</button>
     <h2>Управляйте всеми событиями в системе</h2>
     <button class="btn btn-outline-primary" (click)="addEvent()">Добавить</button>
+
+    <h2>Добавить вакансии из "Центра карьеры НИУ ВШЭ"</h2>
+    <button class="btn btn-outline-primary" (click)="parseVacancies()">Добавить вакансии</button>
   </div>
   <div class="event-cards">
     @for (projEvent of eventsMgmService.events(); track $index) {
