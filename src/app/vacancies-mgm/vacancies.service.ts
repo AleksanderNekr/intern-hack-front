@@ -12,7 +12,7 @@ export class VacanciesService {
 
   getVacancies() {
 
-    fetch("https://parser-hse.cleverapps.io/manual_parse", {
+    fetch("http://localhost:8080/manual_parse", {
       method: "GET",
       redirect: "follow",
       mode: "no-cors"
