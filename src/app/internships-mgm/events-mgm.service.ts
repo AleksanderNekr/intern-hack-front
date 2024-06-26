@@ -74,7 +74,6 @@ export class EventsMgmService {
       headers: myHeaders,
       body: raw,
       redirect: "follow",
-      mode: 'no-cors'
     })
       .then((response) => response.text())
       .then((result) => console.log(result))
